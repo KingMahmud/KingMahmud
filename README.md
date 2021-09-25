@@ -1,6 +1,6 @@
 Hi 👋, I'm Mahmud
 
-An Android Reverser and Developer from Bangladesh🇧🇩
+An Android reverser and developer from Bangladesh🇧🇩
 
 - 🔭 I’m currently working on Private Projects
 
