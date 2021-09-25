@@ -1,5 +1,5 @@
 Hi 👋, I'm Mahmud
-Reverser and Developer from Bangladesh🇧🇩
+An Android Reverser and Developer from Bangladesh🇧🇩
 
 - 🔭 I’m currently working on Private Projects
 
