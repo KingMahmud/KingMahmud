@@ -28,7 +28,7 @@ jobs:
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
 
-      - name: Upload debug apk
+      - name: Upload release apk
         uses: actions/upload-artifact@v2
         with:
           name: apk-release
