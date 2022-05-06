@@ -2,16 +2,20 @@ name: Android CI
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: "version number for this release."
+        required: true
 
 jobs:
   build:
     name: Build release apk
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.0.2
 
       - name: set up JDK 11
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3.3.0
         with:
           java-version: '11'
           distribution: 'adopt'
@@ -21,15 +25,22 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build release apk
-        uses: eskatos/gradle-command-action@v1
+        uses: eskatos/gradle-command-action@v2.1.5
         with:
           arguments: assembleRelease
           distributions-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
-
-      - name: Upload release apk
-        uses: actions/upload-artifact@v2
+      
+      - name: Push tag
+        run: |
+          git push origin "v${{ github.event.inputs.version }}"
+          
+      - name: Add apk to release entry
+        uses: softprops/action-gh-release@v0.1.14
         with:
-          name: apk-release
-          path: app/build/outputs/apk/release
+          draft: true
+          name: ${{ github.event.input.version }} 
+          tag_name: "v${{ github.event.inputs.version }}"
+          target_commitish: ${{ env.TARGET_COMMITISH }}
+          files: app/build/outputs/apk/release/app-release.apk
