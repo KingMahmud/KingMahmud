@@ -1,4 +1,4 @@
-name: Frida Android CI
+name: Frida Android CI(thin)
 
 on:
   workflow_dispatch:

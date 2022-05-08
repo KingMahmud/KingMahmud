@@ -1,4 +1,4 @@
-name: StrongR Frida Android CI
+name: StrongR Frida Android CI(thin)
 
 on:
   workflow_dispatch:
