@@ -1,3 +1,3 @@
 # Original repo
 
-https://github.com/AAAA-Project/Patchs/issues
+https://github.com/AAAA-Project/Patchs/
