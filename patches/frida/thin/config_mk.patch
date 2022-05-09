@@ -1,21 +1,30 @@
 diff --git a/config.mk b/config.mk
-index 470bbe6..2c1e1ac 100644
+index 470bbe6..3a816bb 100644
 --- a/config.mk
 +++ b/config.mk
-@@ -4,12 +4,12 @@ PREFIX ?= /usr
+@@ -4,15 +4,20 @@ PREFIX ?= /usr
  FRIDA := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
  
  # Features ordered by binary footprint, from largest to smallest
 -FRIDA_V8 ?= auto
++
++# V8 is heavy.
 +FRIDA_V8 ?= disabled
  FRIDA_CONNECTIVITY ?= enabled
  FRIDA_DATABASE ?= enabled
 -FRIDA_JAVA_BRIDGE ?= auto
 -FRIDA_OBJC_BRIDGE ?= auto
 -FRIDA_SWIFT_BRIDGE ?= auto
++# Android mostly needs java bridge.
 +FRIDA_JAVA_BRIDGE ?= enabled
++# Android possibly doesn't require objc and swift bridge.
 +FRIDA_OBJC_BRIDGE ?= disabled
 +FRIDA_SWIFT_BRIDGE ?= disabled
  
  # Include jailbreak-specific integrations
- FRIDA_JAILBREAK ?= auto
+-FRIDA_JAILBREAK ?= auto
++# iOS specific flag.
++FRIDA_JAILBREAK ?= disabled
+ 
+ FRIDA_ASAN ?= no
+ 
