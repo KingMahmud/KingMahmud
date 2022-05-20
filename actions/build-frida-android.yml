@@ -1,4 +1,5 @@
 name: Frida Android CI
+author: KingMahmud
 
 on:
   workflow_dispatch:
