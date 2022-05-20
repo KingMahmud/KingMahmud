@@ -1,5 +1,4 @@
 name: "StrongR Frida Android CI(thin)"
-author: "KingMahmud"
 
 on:
   workflow_dispatch:
