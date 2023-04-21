@@ -1,0 +1,49 @@
+name: Android CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: Enter repo.
+      branch:
+        description: Enter branch/tag.
+        required: false
+        default: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: ${{ github.event.inputs.repo }}
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: set up JDK
+        uses: actions/setup-java@v3.11.0
+        with:
+          java-version: 19
+          distribution: temurin
+          
+      - name: Setup NDK
+        uses: nttld/setup-ndk@v1.2.0
+        with:
+          ndk-version: r25c
+          add-to-path: true
+          local-cache: false
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.0.6
+
+      - name: Build with gradle
+        uses: gradle/gradle-build-action@v2.4.2
+        with:
+          arguments: assembleDebug assembleRelease
+      
+      - name: Upload
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          path: app/build/outputs/
